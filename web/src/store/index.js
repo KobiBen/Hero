@@ -19,10 +19,7 @@ export default new Vuex.Store({
   state: {
     account: null,
     error: null,
-    // mining: false,
-    // characterNFT: null,
-    // characters: [],
-    contract_address: "0xF97bEf53C811dc05FCd17931F8252960d429CC97",
+    contract_address: "0x58cD9b38E64E76031571D215D948f8124195Ea85",
 
   },
   getters: {

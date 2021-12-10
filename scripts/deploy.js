@@ -1,5 +1,5 @@
 async function main() {
-  const Hero = await ethers.getContractFactory("HeroC")
+  const Hero = await ethers.getContractFactory("HeroContract")
 
   // Start deployment, returning a promise that resolves to a contract object
   const hero = await Hero.deploy()
