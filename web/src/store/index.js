@@ -19,7 +19,7 @@ export default new Vuex.Store({
   state: {
     account: null,
     error: null,
-    contract_address: "0x58cD9b38E64E76031571D215D948f8124195Ea85",
+    contract_address: "0x0B3E4A623d1c68AE0Ac996782b55Dabbf9A02A70",
 
   },
   getters: {
@@ -58,7 +58,7 @@ export default new Vuex.Store({
           await dispatch("requestAccess");
         }
         await dispatch("checkNetwork");
-        await dispatch("getHeroesByOwner");
+        await dispatch("Upgraded");
         // await dispatch("setupEventListeners");
       } catch (error) {
         console.log(error);
@@ -68,8 +68,9 @@ export default new Vuex.Store({
     async checkNetwork({ commit, dispatch }) {
       const { ethereum } = window;
       let chainId = await ethereum.request({ method: "eth_chainId" });
-      const ropstenChainId = "0x3";
-      if (chainId !== ropstenChainId) {
+      //const ropstenChainId = "0x3";
+      const rinkebyChainId = "0x4";
+      if (chainId !== rinkebyChainId) {
         if (!(await dispatch("switchNetwork"))) {
           commit(
             "setError",
@@ -83,7 +84,7 @@ export default new Vuex.Store({
         const { ethereum } = window;
         await ethereum.request({
           method: "wallet_switchEthereumChain",
-          params: [{ chainId: "0x3" }],
+          params: [{ chainId: "0x4" }],
         });
         return 1;
       } catch (switchError) {
@@ -135,13 +136,12 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
-    async getHeroesByOwner({  dispatch }) {
+    async Upgraded({  dispatch }) {
       try {
         const connectedContract = await dispatch("getContract");
-        const _owner = "0x598283ae775bC834D5491e4134429bc986EdfF8B"
-        console.log(_owner)
-        const txn = await connectedContract.testcontractconnection(_owner);
+        const txn = await connectedContract.renderHelloWorld();
         console.log("txn:" + txn);
+
       } catch (error) {
         console.log(error);
       }

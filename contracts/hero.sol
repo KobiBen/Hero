@@ -1,24 +1,36 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-import '@openzeppelin/contracts/utils/math/SafeMath.sol';
-import '@openzeppelin/contracts/access/Ownable.sol';
-import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
-import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import '@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol';
+import '@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol';
+import '@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol';
+import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-contract HeroContract is Ownable, ERC721URIStorage   {
+contract HeroContract is OwnableUpgradeable, ERC721URIStorageUpgradeable   {
 
-constructor() public ERC721("Good Fellaz NFT", "GFN") {}
-  using SafeMath for uint256;
+uint dnaDigits;
+uint dnaModulus;
+uint cooldownTime;
 
-  event newHero(uint heroId, string name, uint dna, uint patk, uint readyTime);
-
+function initialize() public initializer {
   uint dnaDigits = 16;
   uint dnaModulus = 10 ** dnaDigits;
   uint cooldownTime = 7 days;
-  using Counters for Counters.Counter;
-  Counters.Counter private _tokenIds;
+  __ERC721_init("Good Fellaz","GFN");
+  __Ownable_init();
+}
+
+
+  
+  using SafeMathUpgradeable for uint256;
+
+  event newHero(uint heroId, string name, uint dna, uint patk, uint readyTime);
+
+
+  using CountersUpgradeable for CountersUpgradeable.Counter;
+  CountersUpgradeable.Counter private _tokenIds;
 
   struct Hero {
     string name;
@@ -33,6 +45,10 @@ constructor() public ERC721("Good Fellaz NFT", "GFN") {}
   mapping (address => uint) ownerHeroCount;
   mapping (uint => address) heroApprovals;
 
+ function renderHelloWorld () public pure returns (string memory) {
+   return 'The contract was upgraded!! was it? yes it was!!!';
+ }
+
 // mint hero, push it to arrays
 
   function _createHero(string memory _name, uint _dna, uint _patk, uint _readyTime) internal {
@@ -41,8 +57,8 @@ constructor() public ERC721("Good Fellaz NFT", "GFN") {}
     heroToOwner[id] = msg.sender;
     ownerHeroCount[msg.sender]++;
     emit newHero(id, _name, _dna, _patk, _readyTime);
-    string memory tokenURI1 = "https://gateway.pinata.cloud/ipfs/QmQ5Dq4BuJvbv8HhAw69PSmMht9vM7xYs7EzzSWkCEkc2T";
-    mintNFT(msg.sender, tokenURI1);
+    string memory tokenURI2 = "https://gateway.pinata.cloud/ipfs/QmQ5Dq4BuJvbv8HhAw69PSmMht9vM7xYs7EzzSWkCEkc2T";
+    mintNFT(msg.sender, tokenURI2);
   
     //need to add minting function
   }

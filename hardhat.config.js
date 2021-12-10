@@ -3,13 +3,14 @@
 */
 require('dotenv').config();
 require("@nomiclabs/hardhat-ethers");
+require('@openzeppelin/hardhat-upgrades');
 const { API_URL, PRIVATE_KEY } = process.env;
 module.exports = {
    solidity: "0.8.7",
-   defaultNetwork: "ropsten",
+   defaultNetwork: "rinkeby",
    networks: {
       hardhat: {},
-      ropsten: {
+      rinkeby: {
          url: API_URL,
          accounts: [`0x${PRIVATE_KEY}`]
       }

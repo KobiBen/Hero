@@ -1,9 +1,11 @@
-async function main() {
-  const Hero = await ethers.getContractFactory("HeroContract")
+// scripts/create-box.js
+const { ethers, upgrades } = require("hardhat");
 
-  // Start deployment, returning a promise that resolves to a contract object
-  const hero = await Hero.deploy()
-  console.log("Contract deployed to address:", hero.address)
+async function main() {
+  const Box = await ethers.getContractFactory("HeroContract");
+  const box = await upgrades.deployProxy(Box, []);
+  await box.deployed();
+  console.log("Box deployed to:", box.address);
 }
 
 main()
@@ -12,3 +14,6 @@ main()
     console.error(error)
     process.exit(1)
   })
+
+
+  
