@@ -1,0 +1,31 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Rarity",
+      "value": "130/150"
+    },
+    {
+      "trait_type": "Class",
+      "value": "Warrior Ape"
+    },
+    {
+      "trait_type": "Active Skill",
+      "value": "Mortal Blow"
+    },
+    {
+      "trait_type": "Passive Skill",
+      "value": "5% Increased Attack Speed"
+    },
+    {
+      "trait_type": "Attack Spped",
+      "value": "130/150"
+    },
+    {
+      "trait_type": "HP",
+      "value": "1800/2200"
+    }
+  ],
+  "description": "The Warrior Ape is a close combat meele, dealing huge damage to his foes",
+  "image": "https://gateway.pinata.cloud/ipfs/QmVHfqxfrMqgspmKuxbVXr9EAUqevDqaiiqsoTMpUtYJPd",
+  "name": "Ape Warrior"
+}
